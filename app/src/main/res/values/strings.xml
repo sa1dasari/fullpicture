@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FullPicture</string>
+    <string name="start_bubble">Start Bubble</string>
+    <string name="stop_bubble">Stop Bubble</string>
+    <string name="grant_overlay">Grant Overlay Permission</string>
+    <string name="status_idle">Tap a bubble. We\'ll fill in what was left out.</string>
+    <string name="notif_channel_bubble">FullPicture Bubble</string>
+    <string name="notif_channel_capture">FullPicture Capture</string>
+    <string name="notif_bubble_text">Bubble is active</string>
+    <string name="notif_capture_text">Ready to capture screen</string>
+    <string name="a11y_description">Reads on-screen text from social feeds (Instagram, TikTok, YouTube, X) so FullPicture can fact-check the post you\'re viewing without OCR. Also detects when you pause scrolling to optionally auto-trigger an analysis.</string>
+    <string name="grant_a11y">Enable Accessibility Service</string>
+</resources>
+
