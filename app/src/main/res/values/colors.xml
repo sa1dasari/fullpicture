@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bubble_primary">#FF5B6CFF</color>
+    <color name="bubble_thinking">#FFFFB020</color>
+    <color name="panel_bg">#F2101216</color>
+    <color name="panel_text">#FFFFFFFF</color>
+</resources>
+

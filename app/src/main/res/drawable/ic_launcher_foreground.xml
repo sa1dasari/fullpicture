@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Simple "FP" monogram inside a circle so the launcher has something to show. -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,26 m-22,0 a22,22 0 1,0 44,0 a22,22 0 1,0 -44,0 Z
+                          M45,38 L45,70 L50,70 L50,57 L60,57 L60,52 L50,52 L50,43 L62,43 L62,38 Z
+                          M64,45 L64,70 L69,70 L69,60 L74,60 L74,55 L69,55 L69,50 L76,50 L76,45 Z" />
+</vector>
+
