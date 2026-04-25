@@ -1,8 +1,10 @@
 package com.fullpicture.app.claude
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.util.Base64
 import com.fullpicture.app.a11y.ScreenContext
+import com.fullpicture.app.settings.Settings
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -22,8 +24,8 @@ object ClaudeClient {
     private const val MODEL = "claude-sonnet-4-5"
     private const val API_VERSION = "2023-06-01"
 
-    // TODO: inject from BuildConfig / EncryptedSharedPreferences.
-    private const val API_KEY = ""
+    // Resolved at call-time from the local Settings store.
+    private fun apiKey(ctx: Context): String = Settings.getApiKey(ctx)
 
     private val SYSTEM_PROMPT = """
         You are FullPicture, an assistant that looks at a social-media post a
@@ -49,11 +51,13 @@ object ClaudeClient {
         .build()
 
     fun analyze(
+        ctx: Context,
         screenshot: Bitmap,
         screenContext: ScreenContext?,
         audioNote: String? = null,
     ): MissingContextAnalysis {
-        if (API_KEY.isBlank()) return stub(screenContext, audioNote)
+        val key = apiKey(ctx)
+        if (key.isBlank()) return stub(screenContext, audioNote)
 
         val b64 = encodeToBase64Png(screenshot)
         val userText = buildUserPrompt(screenContext, audioNote)
@@ -83,7 +87,7 @@ object ClaudeClient {
 
         val req = Request.Builder()
             .url(ENDPOINT)
-            .header("x-api-key", API_KEY)
+            .header("x-api-key", key)
             .header("anthropic-version", API_VERSION)
             .header("content-type", "application/json")
             .post(body.toString().toRequestBody("application/json".toMediaType()))
@@ -99,8 +103,9 @@ object ClaudeClient {
     }
 
     /** Back-compat shim for the original skeleton call site. */
-    fun analyzeScreenshot(bitmap: Bitmap): String =
-        analyze(bitmap, null, null).renderForPanel()
+    @Suppress("unused")
+    fun analyzeScreenshot(ctx: Context, bitmap: Bitmap): String =
+        analyze(ctx, bitmap, null, null).renderForPanel()
 
     // region helpers
 
