@@ -11,5 +11,21 @@
     <string name="notif_capture_text">Ready to capture screen</string>
     <string name="a11y_description">Reads on-screen text from social feeds (Instagram, TikTok, YouTube, X) so FullPicture can fact-check the post you\'re viewing without OCR. Also detects when you pause scrolling to optionally auto-trigger an analysis.</string>
     <string name="grant_a11y">Enable Accessibility Service</string>
+    <string name="api_key_hint">Claude API key (sk-ant-…)</string>
+    <string name="save_api_key">Save Key</string>
+    <string name="api_key_saved">API key saved.</string>
+    <string name="api_key_cleared">API key cleared.</string>
+    <string name="auto_trigger_toggle">Auto-analyze when I pause scrolling</string>
+    <string name="copy_to_clipboard">Copy</string>
+    <string name="copied">Copied to clipboard</string>
+    <string name="status_overlay_ok">Overlay permission ✓</string>
+    <string name="status_overlay_missing">Overlay permission ✗ — tap below</string>
+    <string name="status_a11y_ok">Accessibility service ✓</string>
+    <string name="status_a11y_missing">Accessibility service ✗ — tap below</string>
+    <string name="status_key_ok">API key saved ✓</string>
+    <string name="status_key_missing">API key not set (stub responses)</string>
+    <string name="bubble_running">Bubble running. Tap it on any screen.</string>
+    <string name="capture_denied">Screen capture permission denied.</string>
+    <string name="need_capture_consent">Open FullPicture and tap Start Bubble to re-grant screen capture.</string>
 </resources>
 
