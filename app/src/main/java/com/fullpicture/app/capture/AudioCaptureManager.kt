@@ -1,6 +1,7 @@
 package com.fullpicture.app.capture
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.media.AudioAttributes
 import android.media.AudioFormat
 import android.media.AudioPlaybackCaptureConfiguration
@@ -30,7 +31,11 @@ object AudioCaptureManager {
     private const val ENCODING = AudioFormat.ENCODING_PCM_16BIT
 
     @SuppressLint("MissingPermission")
-    suspend fun captureClip(projection: MediaProjection, durationMs: Long = 4_000): ByteArray? =
+    suspend fun captureClip(
+        context: Context,
+        projection: MediaProjection,
+        durationMs: Long = 4_000
+    ): ByteArray? =
         withContext(Dispatchers.IO) {
             val config = AudioPlaybackCaptureConfiguration.Builder(projection)
                 .addMatchingUsage(AudioAttributes.USAGE_MEDIA)
@@ -47,11 +52,18 @@ object AudioCaptureManager {
             val minBuf = AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL, ENCODING)
                 .coerceAtLeast(4096)
 
-            val record = AudioRecord.Builder()
+            // Pass an attribution-bearing context so AppOps can register
+            // RECORD_AUDIO_OUTPUT against our package/attributionTag instead of
+            // logging "Attribution not found ... pkg=...(null)" from system_server.
+            val attributedCtx = context.applicationContext
+            val builder = AudioRecord.Builder()
                 .setAudioFormat(format)
                 .setBufferSizeInBytes(minBuf * 2)
                 .setAudioPlaybackCaptureConfig(config)
-                .build()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                builder.setContext(attributedCtx)
+            }
+            val record = builder.build()
 
             return@withContext runCatching {
                 record.startRecording()
